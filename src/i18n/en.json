@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "GadoPro",
+    "tagline": "Islamic Inheritance Distribution",
+    "description": "Calculate and distribute inheritance according to Islamic (Faraid) law"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "newCase": "New Case",
+    "language": "Language",
+    "darkMode": "Dark Mode"
+  },
+  "dashboard": {
+    "title": "My Cases",
+    "subtitle": "Manage your inheritance distribution cases",
+    "noCases": "No cases yet",
+    "noCasesDesc": "Create your first inheritance case to get started",
+    "createFirst": "Create First Case",
+    "totalCases": "Total Cases",
+    "draft": "Draft",
+    "calculated": "Calculated",
+    "distributed": "Distributed"
+  },
+  "case": {
+    "create": "Create Case",
+    "edit": "Edit Case",
+    "delete": "Delete Case",
+    "deleteConfirm": "Are you sure you want to delete this case?",
+    "deceasedName": "Deceased Name",
+    "deceasedDate": "Date of Death",
+    "notes": "Notes",
+    "totalEstate": "Total Estate Value",
+    "status": "Status",
+    "createdAt": "Created",
+    "updatedAt": "Last Updated",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "viewDetails": "View Details",
+    "calculate": "Calculate Shares",
+    "recalculate": "Recalculate"
+  },
+  "heir": {
+    "title": "Heirs",
+    "add": "Add Heir",
+    "name": "Heir Name",
+    "relationship": "Relationship",
+    "share": "Share",
+    "amount": "Amount",
+    "remove": "Remove",
+    "noHeirs": "No heirs added yet",
+    "relationships": {
+      "husband": "Husband",
+      "wife": "Wife",
+      "son": "Son",
+      "daughter": "Daughter",
+      "father": "Father",
+      "mother": "Mother",
+      "grandfather": "Grandfather",
+      "grandmother": "Grandmother",
+      "brother": "Brother",
+      "sister": "Sister",
+      "half_brother_paternal": "Half-Brother (Paternal)",
+      "half_sister_paternal": "Half-Sister (Paternal)",
+      "half_brother_maternal": "Half-Brother (Maternal)",
+      "half_sister_maternal": "Half-Sister (Maternal)",
+      "grandson": "Grandson",
+      "granddaughter": "Granddaughter",
+      "uncle": "Uncle",
+      "nephew": "Nephew"
+    }
+  },
+  "asset": {
+    "title": "Assets",
+    "add": "Add Asset",
+    "type": "Type",
+    "description": "Description",
+    "value": "Value",
+    "remove": "Remove",
+    "noAssets": "No assets added yet",
+    "types": {
+      "money": "Money",
+      "property": "Property",
+      "land": "Land",
+      "valuables": "Valuables"
+    },
+    "totalValue": "Total Asset Value"
+  },
+  "calculation": {
+    "title": "Faraid Distribution",
+    "heirName": "Heir",
+    "relationship": "Relationship",
+    "fraction": "Fraction",
+    "percentage": "Percentage",
+    "amount": "Amount",
+    "totalDistributed": "Total Distributed",
+    "remainder": "Remainder",
+    "noCalculation": "Add heirs and assets to calculate distribution"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "search": "Search...",
+    "noResults": "No results found",
+    "currency": "$"
+  }
+}

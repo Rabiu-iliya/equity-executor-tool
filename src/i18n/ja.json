@@ -1,0 +1,10 @@
+{
+  "app": { "name": "GadoPro", "tagline": "イスラム相続分配", "description": "イスラム法（ファライド）に基づいて相続を計算・分配" },
+  "nav": { "dashboard": "ダッシュボード", "newCase": "新規ケース", "language": "言語", "darkMode": "ダークモード" },
+  "dashboard": { "title": "マイケース", "subtitle": "相続分配ケースを管理", "noCases": "ケースなし", "noCasesDesc": "最初の相続ケースを作成してください", "createFirst": "最初のケースを作成", "totalCases": "合計ケース数", "draft": "下書き", "calculated": "計算済み", "distributed": "分配済み" },
+  "case": { "create": "ケース作成", "edit": "ケース編集", "delete": "ケース削除", "deleteConfirm": "このケースを削除してもよろしいですか？", "deceasedName": "故人の名前", "deceasedDate": "死亡日", "notes": "メモ", "totalEstate": "遺産総額", "status": "ステータス", "createdAt": "作成日", "updatedAt": "最終更新", "save": "保存", "cancel": "キャンセル", "back": "戻る", "viewDetails": "詳細を見る", "calculate": "分配を計算", "recalculate": "再計算" },
+  "heir": { "title": "相続人", "add": "相続人を追加", "name": "名前", "relationship": "続柄", "share": "持分", "amount": "金額", "remove": "削除", "noHeirs": "相続人が追加されていません", "relationships": { "husband": "夫", "wife": "妻", "son": "息子", "daughter": "娘", "father": "父", "mother": "母", "grandfather": "祖父", "grandmother": "祖母", "brother": "兄弟", "sister": "姉妹", "half_brother_paternal": "異母兄弟", "half_sister_paternal": "異母姉妹", "half_brother_maternal": "異父兄弟", "half_sister_maternal": "異父姉妹", "grandson": "孫息子", "granddaughter": "孫娘", "uncle": "叔父", "nephew": "甥" } },
+  "asset": { "title": "資産", "add": "資産を追加", "type": "種類", "description": "説明", "value": "価値", "remove": "削除", "noAssets": "資産が追加されていません", "types": { "money": "現金", "property": "不動産", "land": "土地", "valuables": "貴重品" }, "totalValue": "総資産額" },
+  "calculation": { "title": "ファライド分配", "heirName": "相続人", "relationship": "続柄", "fraction": "分数", "percentage": "割合", "amount": "金額", "totalDistributed": "分配済み合計", "remainder": "残余", "noCalculation": "分配を計算するには相続人と資産を追加してください" },
+  "common": { "loading": "読み込み中...", "error": "エラーが発生しました", "success": "成功", "confirm": "確認", "cancel": "キャンセル", "delete": "削除", "edit": "編集", "save": "保存", "search": "検索...", "noResults": "結果なし", "currency": "¥" }
+}

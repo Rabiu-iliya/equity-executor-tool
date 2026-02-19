@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "GadoPro",
+    "tagline": "Raba Gado Bisa Shari'ar Musulunci",
+    "description": "Lissafi da raba gado bisa dokar Musulunci (Fara'id)"
+  },
+  "nav": {
+    "dashboard": "Babban Shafi",
+    "newCase": "Sabon Shari'a",
+    "language": "Harshe",
+    "darkMode": "Yanayin Duhu"
+  },
+  "dashboard": {
+    "title": "Shari'o'i Na",
+    "subtitle": "Sarrafa shari'o'in rabon gadonka",
+    "noCases": "Babu wata shari'a tukuna",
+    "noCasesDesc": "Ƙirƙiri shari'ar gado ta farko domin farawa",
+    "createFirst": "Ƙirƙiri Ta Farko",
+    "totalCases": "Jimillar Shari'o'i",
+    "draft": "Daftari",
+    "calculated": "An Yi Lissafi",
+    "distributed": "An Raba"
+  },
+  "case": {
+    "create": "Ƙirƙiri Shari'a",
+    "edit": "Gyara Shari'a",
+    "delete": "Goge Shari'a",
+    "deleteConfirm": "Ka tabbata kana son goge wannan shari'ar?",
+    "deceasedName": "Sunan Mamaci",
+    "deceasedDate": "Ranar Mutuwa",
+    "notes": "Bayanan Lura",
+    "totalEstate": "Jimillar Dukiyar Gado",
+    "status": "Matsayi",
+    "createdAt": "An Ƙirƙira",
+    "updatedAt": "An Sabunta",
+    "save": "Ajiye",
+    "cancel": "Soke",
+    "back": "Koma Baya",
+    "viewDetails": "Duba Cikakkun Bayanai",
+    "calculate": "Lissafa Rabo",
+    "recalculate": "Sake Lissafi"
+  },
+  "heir": {
+    "title": "Magada",
+    "add": "Ƙara Magaji",
+    "name": "Sunan Magaji",
+    "relationship": "Dangantaka",
+    "share": "Rabo",
+    "amount": "Adadi",
+    "remove": "Cire",
+    "noHeirs": "Ba a ƙara wani magaji ba tukuna",
+    "relationships": {
+      "husband": "Miji",
+      "wife": "Mata",
+      "son": "Ɗa",
+      "daughter": "Ɗiya",
+      "father": "Uba",
+      "mother": "Uwa",
+      "grandfather": "Kaka (Namiji)",
+      "grandmother": "Kaka (Mace)",
+      "brother": "Ɗan'uwa",
+      "sister": "Ƴar'uwa",
+      "half_brother_paternal": "Ɗan'uwa (Uba ɗaya)",
+      "half_sister_paternal": "Ƴar'uwa (Uba ɗaya)",
+      "half_brother_maternal": "Ɗan'uwa (Uwa ɗaya)",
+      "half_sister_maternal": "Ƴar'uwa (Uwa ɗaya)",
+      "grandson": "Jikan Namiji",
+      "granddaughter": "Jikar Mace",
+      "uncle": "Kawu",
+      "nephew": "Ɗan'uwan Ɗa"
+    }
+  },
+  "asset": {
+    "title": "Dukiyoyi",
+    "add": "Ƙara Dukiya",
+    "type": "Nau'i",
+    "description": "Bayani",
+    "value": "Ƙima",
+    "remove": "Cire",
+    "noAssets": "Ba a ƙara wata dukiya ba tukuna",
+    "types": {
+      "money": "Kuɗi",
+      "property": "Gida",
+      "land": "Ƙasa",
+      "valuables": "Kayan Daraja"
+    },
+    "totalValue": "Jimillar Ƙimar Dukiya"
+  },
+  "calculation": {
+    "title": "Rabon Fara'id",
+    "heirName": "Magaji",
+    "relationship": "Dangantaka",
+    "fraction": "Kason Lissafi",
+    "percentage": "Kashi (%)",
+    "amount": "Adadi",
+    "totalDistributed": "Jimillar An Raba",
+    "remainder": "Ragowar",
+    "noCalculation": "Ƙara magada da dukiyoyi domin yin lissafi"
+  },
+  "common": {
+    "loading": "Ana Loda...",
+    "error": "An samu kuskure",
+    "success": "An Yi Nasara",
+    "confirm": "Tabbatar",
+    "cancel": "Soke",
+    "delete": "Goge",
+    "edit": "Gyara",
+    "save": "Ajiye",
+    "search": "Nema...",
+    "noResults": "Ba a sami sakamako ba",
+    "currency": "₦"
+  }
+}

@@ -1,29 +1,17 @@
 export type CaseStatus = 'draft' | 'calculated' | 'distributed';
 
 export type HeirRelationship =
-  | 'husband'
-  | 'wife'
-  | 'son'
-  | 'daughter'
-  | 'father'
-  | 'mother'
-  | 'grandfather'
-  | 'grandmother'
-  | 'brother'
-  | 'sister'
-  | 'half_brother_paternal'
-  | 'half_sister_paternal'
-  | 'half_brother_maternal'
-  | 'half_sister_maternal'
-  | 'grandson'
-  | 'granddaughter'
-  | 'uncle'
-  | 'nephew';
+  | 'husband' | 'wife' | 'son' | 'daughter' | 'father' | 'mother'
+  | 'grandfather' | 'grandmother' | 'brother' | 'sister'
+  | 'half_brother_paternal' | 'half_sister_paternal'
+  | 'half_brother_maternal' | 'half_sister_maternal'
+  | 'grandson' | 'granddaughter' | 'uncle' | 'nephew';
 
 export type AssetType = 'money' | 'property' | 'land' | 'valuables';
 
 export interface InheritanceCase {
   id: string;
+  admin_id?: string;
   deceased_name: string;
   deceased_date: string;
   notes: string;

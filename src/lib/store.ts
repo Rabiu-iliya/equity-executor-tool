@@ -1,111 +1,120 @@
-import { v4 as uuidv4 } from 'uuid';
-import { InheritanceCase, Heir, Asset, CaseStatus } from './types';
+import { supabase } from '@/integrations/supabase/client';
+import { InheritanceCase, Heir, Asset, HeirRelationship, AssetType, CaseStatus } from './types';
 
-const CASES_KEY = 'gadopro_cases';
-const HEIRS_KEY = 'gadopro_heirs';
-const ASSETS_KEY = 'gadopro_assets';
-
-function load<T>(key: string): T[] {
-  try {
-    return JSON.parse(localStorage.getItem(key) || '[]');
-  } catch {
-    return [];
-  }
-}
-
-function save<T>(key: string, data: T[]) {
-  localStorage.setItem(key, JSON.stringify(data));
+async function uid(): Promise<string> {
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) throw new Error('Not authenticated');
+  return data.user.id;
 }
 
 // === CASES ===
-export function getCases(): InheritanceCase[] {
-  return load<InheritanceCase>(CASES_KEY).sort((a, b) =>
-    new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-  );
+export async function getCases(): Promise<InheritanceCase[]> {
+  const { data, error } = await supabase
+    .from('cases').select('*').order('updated_at', { ascending: false });
+  if (error) throw error;
+  return (data || []).map(mapCase);
 }
 
-export function getCase(id: string): InheritanceCase | undefined {
-  return load<InheritanceCase>(CASES_KEY).find(c => c.id === id);
+export async function getCase(id: string): Promise<InheritanceCase | null> {
+  const { data, error } = await supabase.from('cases').select('*').eq('id', id).maybeSingle();
+  if (error) throw error;
+  return data ? mapCase(data) : null;
 }
 
-export function createCase(data: Pick<InheritanceCase, 'deceased_name' | 'deceased_date' | 'notes' | 'total_estate'>): InheritanceCase {
-  const cases = load<InheritanceCase>(CASES_KEY);
-  const now = new Date().toISOString();
-  const newCase: InheritanceCase = {
-    id: uuidv4(),
-    ...data,
+export async function createCase(d: Pick<InheritanceCase, 'deceased_name' | 'deceased_date' | 'notes' | 'total_estate'>) {
+  const admin_id = await uid();
+  const { data, error } = await supabase.from('cases').insert({
+    admin_id,
+    deceased_name: d.deceased_name,
+    deceased_date: d.deceased_date || null,
+    notes: d.notes || null,
+    total_estate: d.total_estate,
     status: 'draft',
-    created_at: now,
-    updated_at: now,
-  };
-  cases.push(newCase);
-  save(CASES_KEY, cases);
-  return newCase;
+  }).select().single();
+  if (error) throw error;
+  return mapCase(data);
 }
 
-export function updateCase(id: string, data: Partial<InheritanceCase>): InheritanceCase | undefined {
-  const cases = load<InheritanceCase>(CASES_KEY);
-  const idx = cases.findIndex(c => c.id === id);
-  if (idx === -1) return undefined;
-  cases[idx] = { ...cases[idx], ...data, updated_at: new Date().toISOString() };
-  save(CASES_KEY, cases);
-  return cases[idx];
+export async function updateCase(id: string, d: Partial<InheritanceCase>) {
+  const patch: any = {};
+  if (d.deceased_name !== undefined) patch.deceased_name = d.deceased_name;
+  if (d.deceased_date !== undefined) patch.deceased_date = d.deceased_date || null;
+  if (d.notes !== undefined) patch.notes = d.notes;
+  if (d.total_estate !== undefined) patch.total_estate = d.total_estate;
+  if (d.status !== undefined) patch.status = d.status;
+  const { error } = await supabase.from('cases').update(patch).eq('id', id);
+  if (error) throw error;
 }
 
-export function deleteCase(id: string) {
-  save(CASES_KEY, load<InheritanceCase>(CASES_KEY).filter(c => c.id !== id));
-  save(HEIRS_KEY, load<Heir>(HEIRS_KEY).filter(h => h.case_id !== id));
-  save(ASSETS_KEY, load<Asset>(ASSETS_KEY).filter(a => a.case_id !== id));
+export async function deleteCase(id: string) {
+  const { error } = await supabase.from('cases').delete().eq('id', id);
+  if (error) throw error;
 }
 
 // === HEIRS ===
-export function getHeirs(caseId: string): Heir[] {
-  return load<Heir>(HEIRS_KEY).filter(h => h.case_id === caseId);
+export async function getHeirs(case_id: string): Promise<Heir[]> {
+  const { data, error } = await supabase.from('heirs').select('*').eq('case_id', case_id).order('created_at');
+  if (error) throw error;
+  return (data || []).map(mapHeir);
 }
 
-export function addHeir(data: Pick<Heir, 'case_id' | 'name' | 'relationship'>): Heir {
-  const heirs = load<Heir>(HEIRS_KEY);
-  const newHeir: Heir = { id: uuidv4(), ...data, share_fraction: '', share_amount: 0 };
-  heirs.push(newHeir);
-  save(HEIRS_KEY, heirs);
-  return newHeir;
+export async function addHeir(d: Pick<Heir, 'case_id' | 'name' | 'relationship'>) {
+  const admin_id = await uid();
+  const { error } = await supabase.from('heirs').insert({
+    admin_id, case_id: d.case_id, name: d.name, relationship: d.relationship,
+  });
+  if (error) throw error;
 }
 
-export function updateHeir(id: string, data: Partial<Heir>): void {
-  const heirs = load<Heir>(HEIRS_KEY);
-  const idx = heirs.findIndex(h => h.id === id);
-  if (idx !== -1) {
-    heirs[idx] = { ...heirs[idx], ...data };
-    save(HEIRS_KEY, heirs);
-  }
-}
-
-export function deleteHeir(id: string) {
-  save(HEIRS_KEY, load<Heir>(HEIRS_KEY).filter(h => h.id !== id));
+export async function deleteHeir(id: string) {
+  const { error } = await supabase.from('heirs').delete().eq('id', id);
+  if (error) throw error;
 }
 
 // === ASSETS ===
-export function getAssets(caseId: string): Asset[] {
-  return load<Asset>(ASSETS_KEY).filter(a => a.case_id === caseId);
+export async function getAssets(case_id: string): Promise<Asset[]> {
+  const { data, error } = await supabase.from('assets').select('*').eq('case_id', case_id).order('created_at');
+  if (error) throw error;
+  return (data || []).map(mapAsset);
 }
 
-export function addAsset(data: Pick<Asset, 'case_id' | 'type' | 'description' | 'value'>): Asset {
-  const assets = load<Asset>(ASSETS_KEY);
-  const newAsset: Asset = { id: uuidv4(), ...data };
-  assets.push(newAsset);
-  save(ASSETS_KEY, assets);
-  return newAsset;
+export async function addAsset(d: Pick<Asset, 'case_id' | 'type' | 'description' | 'value'>) {
+  const admin_id = await uid();
+  const { error } = await supabase.from('assets').insert({
+    admin_id, case_id: d.case_id, type: d.type, description: d.description, value: d.value,
+  });
+  if (error) throw error;
 }
 
-export function updateAsset(id: string, data: Partial<Asset>): void {
-  const assets = load<Asset>(ASSETS_KEY);
-  const idx = assets.findIndex(a => a.id === id);
-  if (idx !== -1) {
-    assets[idx] = { ...assets[idx], ...data };
-    save(ASSETS_KEY, assets);
-  }
+export async function deleteAsset(id: string) {
+  const { error } = await supabase.from('assets').delete().eq('id', id);
+  if (error) throw error;
 }
 
-export function deleteAsset(id: string) {
-  save(ASSETS_KEY, load<Asset>(ASSETS_KEY).filter(a => a.id !== id));
+// mappers
+function mapCase(r: any): InheritanceCase {
+  return {
+    id: r.id, admin_id: r.admin_id,
+    deceased_name: r.deceased_name,
+    deceased_date: r.deceased_date || '',
+    notes: r.notes || '',
+    total_estate: Number(r.total_estate) || 0,
+    status: r.status as CaseStatus,
+    created_at: r.created_at, updated_at: r.updated_at,
+  };
+}
+function mapHeir(r: any): Heir {
+  return {
+    id: r.id, case_id: r.case_id, name: r.name,
+    relationship: r.relationship as HeirRelationship,
+    share_fraction: r.share_fraction || '',
+    share_amount: Number(r.share_amount) || 0,
+  };
+}
+function mapAsset(r: any): Asset {
+  return {
+    id: r.id, case_id: r.case_id,
+    type: r.type as AssetType, description: r.description,
+    value: Number(r.value) || 0,
+  };
 }

@@ -38,7 +38,28 @@
     "back": "Back",
     "viewDetails": "View Details",
     "calculate": "Calculate Shares",
-    "recalculate": "Recalculate"
+    "recalculate": "Recalculate",
+    "export": "Export",
+    "exported": "Report exported successfully",
+    "created": "Case created",
+    "deleted": "Case deleted"
+  },
+  "auth": {
+    "welcome": "Welcome to GadoPro",
+    "welcomeDesc": "Sign in to manage your inheritance cases securely",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "passwordHint": "At least 8 characters",
+    "orContinue": "Or continue with"
+  },
+  "gadobot": {
+    "subtitle": "AI Faraid Assistant",
+    "greeting": "Assalamu alaikum! I'm GadoBot, your AI assistant for Islamic inheritance questions. Ask me anything about Faraid, share calculations, or how to use GadoPro.",
+    "placeholder": "Ask about inheritance shares..."
   },
   "heir": {
     "title": "Heirs",

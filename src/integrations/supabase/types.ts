@@ -14,7 +14,142 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      assets: {
+        Row: {
+          admin_id: string
+          case_id: string
+          created_at: string
+          description: string
+          id: string
+          type: string
+          value: number
+        }
+        Insert: {
+          admin_id: string
+          case_id: string
+          created_at?: string
+          description: string
+          id?: string
+          type: string
+          value?: number
+        }
+        Update: {
+          admin_id?: string
+          case_id?: string
+          created_at?: string
+          description?: string
+          id?: string
+          type?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assets_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cases: {
+        Row: {
+          admin_id: string
+          created_at: string
+          deceased_date: string | null
+          deceased_name: string
+          id: string
+          notes: string | null
+          status: string
+          total_estate: number
+          updated_at: string
+        }
+        Insert: {
+          admin_id: string
+          created_at?: string
+          deceased_date?: string | null
+          deceased_name: string
+          id?: string
+          notes?: string | null
+          status?: string
+          total_estate?: number
+          updated_at?: string
+        }
+        Update: {
+          admin_id?: string
+          created_at?: string
+          deceased_date?: string | null
+          deceased_name?: string
+          id?: string
+          notes?: string | null
+          status?: string
+          total_estate?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      heirs: {
+        Row: {
+          admin_id: string
+          case_id: string
+          created_at: string
+          id: string
+          name: string
+          relationship: string
+          share_amount: number | null
+          share_fraction: string | null
+        }
+        Insert: {
+          admin_id: string
+          case_id: string
+          created_at?: string
+          id?: string
+          name: string
+          relationship: string
+          share_amount?: number | null
+          share_fraction?: string | null
+        }
+        Update: {
+          admin_id?: string
+          case_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          relationship?: string
+          share_amount?: number | null
+          share_fraction?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "heirs_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

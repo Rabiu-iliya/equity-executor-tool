@@ -116,7 +116,8 @@
     "amount": "Amount",
     "totalDistributed": "Total Distributed",
     "remainder": "Remainder",
-    "noCalculation": "Add heirs and assets to calculate distribution"
+    "noCalculation": "Add heirs and assets to calculate distribution",
+    "done": "Distribution calculated"
   },
   "common": {
     "loading": "Loading...",

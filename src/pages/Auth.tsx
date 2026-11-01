@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Scale, Loader2, Mail, Lock, User } from 'lucide-react';
+import { Scale, Loader2, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 const emailSchema = z.string().trim().email('Invalid email').max(255);
@@ -22,6 +22,8 @@ export default function Auth() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [busy, setBusy] = useState(false);
+  const [showSignInPwd, setShowSignInPwd] = useState(false);
+  const [showSignUpPwd, setShowSignUpPwd] = useState(false);
   const [signin, setSignin] = useState({ email: '', password: '' });
   const [signup, setSignup] = useState({ name: '', email: '', password: '' });
 

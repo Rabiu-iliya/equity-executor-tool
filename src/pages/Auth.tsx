@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Scale, Loader2, Mail, Lock, User } from 'lucide-react';
+import { Scale, Loader2, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 const emailSchema = z.string().trim().email('Invalid email').max(255);
@@ -22,6 +22,8 @@ export default function Auth() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [busy, setBusy] = useState(false);
+  const [showSignInPwd, setShowSignInPwd] = useState(false);
+  const [showSignUpPwd, setShowSignUpPwd] = useState(false);
   const [signin, setSignin] = useState({ email: '', password: '' });
   const [signup, setSignup] = useState({ name: '', email: '', password: '' });
 
@@ -126,8 +128,17 @@ export default function Auth() {
                     <Label htmlFor="si-pwd">{t('auth.password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input id="si-pwd" type="password" autoComplete="current-password" required className="pl-9"
+                      <Input id="si-pwd" type={showSignInPwd ? 'text' : 'password'} autoComplete="current-password" required className="pl-9 pr-10"
                         value={signin.password} onChange={e => setSignin({ ...signin, password: e.target.value })} />
+                      <button
+                        type="button"
+                        aria-label={showSignInPwd ? 'Hide password' : 'Show password'}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setShowSignInPwd(v => !v)}
+                        tabIndex={-1}
+                      >
+                        {showSignInPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
                     </div>
                   </div>
                   <Button type="submit" className="w-full" disabled={busy}>
@@ -158,8 +169,17 @@ export default function Auth() {
                     <Label htmlFor="su-pwd">{t('auth.password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input id="su-pwd" type="password" autoComplete="new-password" required minLength={8} className="pl-9"
+                      <Input id="su-pwd" type={showSignUpPwd ? 'text' : 'password'} autoComplete="new-password" required minLength={8} className="pl-9 pr-10"
                         value={signup.password} onChange={e => setSignup({ ...signup, password: e.target.value })} />
+                      <button
+                        type="button"
+                        aria-label={showSignUpPwd ? 'Hide password' : 'Show password'}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setShowSignUpPwd(v => !v)}
+                        tabIndex={-1}
+                      >
+                        {showSignUpPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
                     </div>
                     <p className="text-xs text-muted-foreground">{t('auth.passwordHint')}</p>
                   </div>

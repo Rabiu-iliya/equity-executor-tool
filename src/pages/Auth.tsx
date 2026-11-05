@@ -61,6 +61,10 @@ export default function Auth() {
       toast.error(err.errors?.[0]?.message || 'Invalid input');
       return;
     }
+    if (signup.confirmPassword !== signup.password) {
+      toast.error(t('auth.passwordMismatch'));
+      return;
+    }
     setBusy(true);
     const { error } = await supabase.auth.signUp({
       email: signup.email,

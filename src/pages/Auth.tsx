@@ -24,8 +24,9 @@ export default function Auth() {
   const [busy, setBusy] = useState(false);
   const [showSignInPwd, setShowSignInPwd] = useState(false);
   const [showSignUpPwd, setShowSignUpPwd] = useState(false);
+  const [showConfirmPwd, setShowConfirmPwd] = useState(false);
   const [signin, setSignin] = useState({ email: '', password: '' });
-  const [signup, setSignup] = useState({ name: '', email: '', password: '' });
+  const [signup, setSignup] = useState({ name: '', email: '', password: '', confirmPassword: '' });
 
   useEffect(() => {
     if (user) navigate('/', { replace: true });
@@ -58,6 +59,10 @@ export default function Auth() {
       pwdSchema.parse(signup.password);
     } catch (err: any) {
       toast.error(err.errors?.[0]?.message || 'Invalid input');
+      return;
+    }
+    if (signup.confirmPassword !== signup.password) {
+      toast.error(t('auth.passwordMismatch'));
       return;
     }
     setBusy(true);

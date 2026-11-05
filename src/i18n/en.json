@@ -54,7 +54,9 @@
     "password": "Password",
     "fullName": "Full Name",
     "passwordHint": "At least 8 characters",
-    "orContinue": "Or continue with"
+    "orContinue": "Or continue with",
+    "confirmPassword": "Confirm Password",
+    "passwordMismatch": "Passwords do not match"
   },
   "gadobot": {
     "subtitle": "AI Faraid Assistant",

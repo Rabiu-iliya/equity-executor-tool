@@ -188,6 +188,23 @@ export default function Auth() {
                     </div>
                     <p className="text-xs text-muted-foreground">{t('auth.passwordHint')}</p>
                   </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="su-confirm-pwd">{t('auth.confirmPassword')}</Label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input id="su-confirm-pwd" type={showConfirmPwd ? 'text' : 'password'} autoComplete="new-password" required minLength={8} className="pl-9 pr-10"
+                        value={signup.confirmPassword} onChange={e => setSignup({ ...signup, confirmPassword: e.target.value })} />
+                      <button
+                        type="button"
+                        aria-label={showConfirmPwd ? 'Hide password' : 'Show password'}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setShowConfirmPwd(v => !v)}
+                        tabIndex={-1}
+                      >
+                        {showConfirmPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
                   <Button type="submit" className="w-full" disabled={busy}>
                     {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : t('auth.signUp')}
                   </Button>
